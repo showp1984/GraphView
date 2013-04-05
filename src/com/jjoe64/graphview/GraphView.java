@@ -253,6 +253,7 @@ abstract public class GraphView extends LinearLayout {
 	private double manualMaxYValue;
 	private double manualMinYValue;
 	private GraphViewStyle graphViewStyle;
+	private GraphViewContentView graphViewContentView;
 
 	public GraphView(Context context, AttributeSet attrs) {
 		this(context, attrs.getAttributeValue(null, "title"));
@@ -283,7 +284,8 @@ abstract public class GraphView extends LinearLayout {
 
 		viewVerLabels = new VerLabelsView(context);
 		addView(viewVerLabels);
-		addView(new GraphViewContentView(context), new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1));
+		graphViewContentView = new GraphViewContentView(context);
+		addView(graphViewContentView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT, 1));
 	}
 
 	public GraphViewStyle getGraphViewStyle() {
@@ -546,6 +548,7 @@ abstract public class GraphView extends LinearLayout {
 		numberformatter[1] = null;
 		invalidate();
 		viewVerLabels.invalidate();
+		graphViewContentView.invalidate();
 	}
 
 	public void removeSeries(GraphViewSeries series)
